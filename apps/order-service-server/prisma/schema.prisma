@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Order {
+  comissionPaidByOwnerField Boolean?
+  createdAt                 DateTime  @default(now())
+  id                        String    @id @default(cuid())
+  orderAppointmentDate      DateTime?
+  orderClientId             String?
+  orderComissionValue       Float?
+  orderCreatedAt            DateTime?
+  orderExtraCost            Float?
+  orderHaveFidelity         Boolean?
+  orderNormalCost           Float?
+  orderOwnerId              String?
+  orderPaidByClientField    Boolean?
+  orderPaymentForm          String?
+  orderPercentageAdopted    Float?
+  orderPointsUsed           Float?
+  orderProfessionalId       String?
+  orderRequestId            String?
+  orderTotalValue           Float?
+  updatedAt                 DateTime  @updatedAt
+}
