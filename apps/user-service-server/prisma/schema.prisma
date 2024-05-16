@@ -1,0 +1,51 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  active            Boolean?
+  address           String?
+  addresses         Json?
+  appointmentsTotal Int?
+  cardId            String?
+  cash              Boolean?
+  cheque            Boolean?
+  city              String?
+  clientId          String?
+  cnpj              String?
+  complement        String?
+  confirmedEmail    Boolean?
+  coord             Json?
+  cpf               String?
+  createdAt         DateTime @default(now())
+  createdById       String?
+  creditcard        Boolean?
+  debitcard         Boolean?
+  distance          Float?
+  email             String?
+  globalId          String?
+  id                String   @id @default(cuid())
+  myOwnerId         String?
+  name              String?
+  nextPlan          String?
+  ownerId           String?
+  password          String?
+  payDay            String?
+  phone             String?
+  photoId           String?
+  photoUrl          String?
+  pix               Boolean?
+  plan              String?
+  role              String?
+  sendedEmail       Boolean?
+  serviceIds        String?
+  serviceOptions    Json?
+  transferbank      Boolean?
+  uf                String?
+  updatedAt         DateTime @updatedAt
+}
