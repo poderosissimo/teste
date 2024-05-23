@@ -5,6 +5,10 @@ import { theme } from "./theme/theme";
 import Login from "./Login";
 import "./App.scss";
 import Dashboard from "./pages/Dashboard";
+import { PostList } from "./post/PostList";
+import { PostCreate } from "./post/PostCreate";
+import { PostEdit } from "./post/PostEdit";
+import { PostShow } from "./post/PostShow";
 import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
@@ -13,10 +17,6 @@ import { CommentList } from "./comment/CommentList";
 import { CommentCreate } from "./comment/CommentCreate";
 import { CommentEdit } from "./comment/CommentEdit";
 import { CommentShow } from "./comment/CommentShow";
-import { PostList } from "./post/PostList";
-import { PostCreate } from "./post/PostCreate";
-import { PostEdit } from "./post/PostEdit";
-import { PostShow } from "./post/PostShow";
 import { FeedList } from "./feed/FeedList";
 import { FeedCreate } from "./feed/FeedCreate";
 import { FeedEdit } from "./feed/FeedEdit";
@@ -33,6 +33,10 @@ import { ChatList } from "./chat/ChatList";
 import { ChatCreate } from "./chat/ChatCreate";
 import { ChatEdit } from "./chat/ChatEdit";
 import { ChatShow } from "./chat/ChatShow";
+import { NotificationList } from "./notification/NotificationList";
+import { NotificationCreate } from "./notification/NotificationCreate";
+import { NotificationEdit } from "./notification/NotificationEdit";
+import { NotificationShow } from "./notification/NotificationShow";
 import { LikeList } from "./like/LikeList";
 import { LikeCreate } from "./like/LikeCreate";
 import { LikeEdit } from "./like/LikeEdit";
@@ -41,10 +45,14 @@ import { FriendRequestList } from "./friendRequest/FriendRequestList";
 import { FriendRequestCreate } from "./friendRequest/FriendRequestCreate";
 import { FriendRequestEdit } from "./friendRequest/FriendRequestEdit";
 import { FriendRequestShow } from "./friendRequest/FriendRequestShow";
-import { NotificationList } from "./notification/NotificationList";
-import { NotificationCreate } from "./notification/NotificationCreate";
-import { NotificationEdit } from "./notification/NotificationEdit";
-import { NotificationShow } from "./notification/NotificationShow";
+import { UserLocationList } from "./userLocation/UserLocationList";
+import { UserLocationCreate } from "./userLocation/UserLocationCreate";
+import { UserLocationEdit } from "./userLocation/UserLocationEdit";
+import { UserLocationShow } from "./userLocation/UserLocationShow";
+import { ChatMessageList } from "./chatMessage/ChatMessageList";
+import { ChatMessageCreate } from "./chatMessage/ChatMessageCreate";
+import { ChatMessageEdit } from "./chatMessage/ChatMessageEdit";
+import { ChatMessageShow } from "./chatMessage/ChatMessageShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -72,6 +80,13 @@ const App = (): React.ReactElement => {
         loginPage={Login}
       >
         <Resource
+          name="Post"
+          list={PostList}
+          edit={PostEdit}
+          create={PostCreate}
+          show={PostShow}
+        />
+        <Resource
           name="User"
           list={UserList}
           edit={UserEdit}
@@ -84,13 +99,6 @@ const App = (): React.ReactElement => {
           edit={CommentEdit}
           create={CommentCreate}
           show={CommentShow}
-        />
-        <Resource
-          name="Post"
-          list={PostList}
-          edit={PostEdit}
-          create={PostCreate}
-          show={PostShow}
         />
         <Resource
           name="Feed"
@@ -121,6 +129,13 @@ const App = (): React.ReactElement => {
           show={ChatShow}
         />
         <Resource
+          name="Notification"
+          list={NotificationList}
+          edit={NotificationEdit}
+          create={NotificationCreate}
+          show={NotificationShow}
+        />
+        <Resource
           name="Like"
           list={LikeList}
           edit={LikeEdit}
@@ -135,11 +150,18 @@ const App = (): React.ReactElement => {
           show={FriendRequestShow}
         />
         <Resource
-          name="Notification"
-          list={NotificationList}
-          edit={NotificationEdit}
-          create={NotificationCreate}
-          show={NotificationShow}
+          name="UserLocation"
+          list={UserLocationList}
+          edit={UserLocationEdit}
+          create={UserLocationCreate}
+          show={UserLocationShow}
+        />
+        <Resource
+          name="ChatMessage"
+          list={ChatMessageList}
+          edit={ChatMessageEdit}
+          create={ChatMessageCreate}
+          show={ChatMessageShow}
         />
       </Admin>
     </div>
