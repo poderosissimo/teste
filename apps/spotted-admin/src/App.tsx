@@ -17,6 +17,10 @@ import { CommentList } from "./comment/CommentList";
 import { CommentCreate } from "./comment/CommentCreate";
 import { CommentEdit } from "./comment/CommentEdit";
 import { CommentShow } from "./comment/CommentShow";
+import { ChatList } from "./chat/ChatList";
+import { ChatCreate } from "./chat/ChatCreate";
+import { ChatEdit } from "./chat/ChatEdit";
+import { ChatShow } from "./chat/ChatShow";
 import { FeedList } from "./feed/FeedList";
 import { FeedCreate } from "./feed/FeedCreate";
 import { FeedEdit } from "./feed/FeedEdit";
@@ -29,10 +33,6 @@ import { FriendList } from "./friend/FriendList";
 import { FriendCreate } from "./friend/FriendCreate";
 import { FriendEdit } from "./friend/FriendEdit";
 import { FriendShow } from "./friend/FriendShow";
-import { ChatList } from "./chat/ChatList";
-import { ChatCreate } from "./chat/ChatCreate";
-import { ChatEdit } from "./chat/ChatEdit";
-import { ChatShow } from "./chat/ChatShow";
 import { NotificationList } from "./notification/NotificationList";
 import { NotificationCreate } from "./notification/NotificationCreate";
 import { NotificationEdit } from "./notification/NotificationEdit";
@@ -53,6 +53,10 @@ import { ChatMessageList } from "./chatMessage/ChatMessageList";
 import { ChatMessageCreate } from "./chatMessage/ChatMessageCreate";
 import { ChatMessageEdit } from "./chatMessage/ChatMessageEdit";
 import { ChatMessageShow } from "./chatMessage/ChatMessageShow";
+import { FollowList } from "./follow/FollowList";
+import { FollowCreate } from "./follow/FollowCreate";
+import { FollowEdit } from "./follow/FollowEdit";
+import { FollowShow } from "./follow/FollowShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -101,6 +105,13 @@ const App = (): React.ReactElement => {
           show={CommentShow}
         />
         <Resource
+          name="Chat"
+          list={ChatList}
+          edit={ChatEdit}
+          create={ChatCreate}
+          show={ChatShow}
+        />
+        <Resource
           name="Feed"
           list={FeedList}
           edit={FeedEdit}
@@ -120,13 +131,6 @@ const App = (): React.ReactElement => {
           edit={FriendEdit}
           create={FriendCreate}
           show={FriendShow}
-        />
-        <Resource
-          name="Chat"
-          list={ChatList}
-          edit={ChatEdit}
-          create={ChatCreate}
-          show={ChatShow}
         />
         <Resource
           name="Notification"
@@ -162,6 +166,13 @@ const App = (): React.ReactElement => {
           edit={ChatMessageEdit}
           create={ChatMessageCreate}
           show={ChatMessageShow}
+        />
+        <Resource
+          name="Follow"
+          list={FollowList}
+          edit={FollowEdit}
+          create={FollowCreate}
+          show={FollowShow}
         />
       </Admin>
     </div>

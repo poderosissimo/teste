@@ -2,15 +2,16 @@ import { Module } from "@nestjs/common";
 import { PostModule } from "./post/post.module";
 import { UserModule } from "./user/user.module";
 import { CommentModule } from "./comment/comment.module";
+import { ChatModule } from "./chat/chat.module";
 import { FeedModule } from "./feed/feed.module";
 import { LocationModule } from "./location/location.module";
 import { FriendModule } from "./friend/friend.module";
-import { ChatModule } from "./chat/chat.module";
 import { NotificationModule } from "./notification/notification.module";
 import { LikeModule } from "./like/like.module";
 import { FriendRequestModule } from "./friendRequest/friendRequest.module";
 import { UserLocationModule } from "./userLocation/userLocation.module";
 import { ChatMessageModule } from "./chatMessage/chatMessage.module";
+import { FollowModule } from "./follow/follow.module";
 import { GetNearbyUsersModule } from "./GetNearbyUsers/getnearbyusers.module";
 import { MessagesModule } from "./Messages/messages.module";
 import { UserProfileModule } from "./UserProfile/userprofile.module";
@@ -29,15 +30,16 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
     PostModule,
     UserModule,
     CommentModule,
+    ChatModule,
     FeedModule,
     LocationModule,
     FriendModule,
-    ChatModule,
     NotificationModule,
     LikeModule,
     FriendRequestModule,
     UserLocationModule,
     ChatMessageModule,
+    FollowModule,
     GetNearbyUsersModule,
     MessagesModule,
     UserProfileModule,
