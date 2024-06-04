@@ -1,0 +1,356 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Agent {
+  appointments   Appointment[]
+  createdAt      DateTime                 @default(now())
+  email          String?
+  id             String                   @id @default(cuid())
+  name           String?
+  phoneNumber    String?
+  specialization EnumAgentSpecialization?
+  updatedAt      DateTime                 @updatedAt
+}
+
+model Appointment {
+  agent      Agent?    @relation(fields: [agentId], references: [id])
+  agentId    String?
+  client     Client?   @relation(fields: [clientId], references: [id])
+  clientId   String?
+  createdAt  DateTime  @default(now())
+  date       DateTime?
+  id         String    @id @default(cuid())
+  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId String?
+  updatedAt  DateTime  @updatedAt
+}
+
+model Property {
+  appointments Appointment[]
+  contractInfo String?
+  createdAt    DateTime      @default(now())
+  id           String        @id @default(cuid())
+  signaturePdf Json?
+  updatedAt    DateTime      @updatedAt
+}
+
+model Client {
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  email        String?
+  id           String        @id @default(cuid())
+  name         String?
+  phoneNumber  String?
+  updatedAt    DateTime      @updatedAt
+}
+
+model Project {
+  createdAt   DateTime           @default(now())
+  description String?
+  endDate     DateTime?
+  id          String             @id @default(cuid())
+  name        String?
+  startDate   DateTime?
+  status      EnumProjectStatus?
+  updatedAt   DateTime           @updatedAt
+}
+
+model Campaign {
+  createdAt   DateTime            @default(now())
+  description String?
+  endDate     DateTime?
+  id          String              @id @default(cuid())
+  name        String?
+  startDate   DateTime?
+  status      EnumCampaignStatus?
+  updatedAt   DateTime            @updatedAt
+}
+
+model Lead {
+  createdAt      DateTime        @default(now())
+  dateCaptured   DateTime?
+  id             String          @id @default(cuid())
+  potentialValue Float?
+  source         String?
+  status         EnumLeadStatus?
+  updatedAt      DateTime        @updatedAt
+}
+
+model Task {
+  assignedTo  String?
+  createdAt   DateTime        @default(now())
+  description String?
+  dueDate     DateTime?
+  id          String          @id @default(cuid())
+  status      EnumTaskStatus?
+  title       String?
+  updatedAt   DateTime        @updatedAt
+}
+
+model Ticket {
+  assignedTo  String?
+  createdAt   DateTime            @default(now())
+  description String?
+  id          String              @id @default(cuid())
+  priority    EnumTicketPriority?
+  status      EnumTicketStatus?
+  title       String?
+  updatedAt   DateTime            @updatedAt
+}
+
+model Contract {
+  approvalRequired Boolean?
+  approvedBy       String?
+  createdAt        DateTime                      @default(now())
+  id               String                        @id @default(cuid())
+  renewalAlertDate DateTime?
+  updatedAt        DateTime                      @updatedAt
+  validationStatus EnumContractValidationStatus?
+}
+
+model Resource {
+  assignedTo   String?
+  availability EnumResourceAvailability?
+  createdAt    DateTime                  @default(now())
+  id           String                    @id @default(cuid())
+  name         String?
+  resourceType EnumResourceResourceType?
+  updatedAt    DateTime                  @updatedAt
+}
+
+model Maintenance {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Quality {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Communication {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Approval {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Compliance {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Innovation {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Risk {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Supplier {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Cliente {
+  contatoPrincipal  String?
+  createdAt         DateTime  @default(now())
+  dataCriacao       DateTime?
+  email             String?
+  endereco          String?
+  id                String    @id @default(cuid())
+  nomeEmpresa       String?
+  observacoes       String?
+  setor             String?
+  tamanhoEmpresa    String?
+  telefone          String?
+  ultimaAtualizacao DateTime?
+  updatedAt         DateTime  @updatedAt
+}
+
+model Contato {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Fornecedor {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Contrato {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Feedback {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Manutencao {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Projeto {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model TicketSuporte {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Usuario {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model CampanhaMarketing {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Inovacao {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Equipamento {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Tarefa {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Proposta {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Ideia {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Aprovacao {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Documento {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Risco {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Relatorio {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model LeadCadastro {
+  contato           String?
+  createdAt         DateTime                      @default(now())
+  dataCriacao       DateTime?
+  email             String?
+  empresa           String?
+  fonteDoLead       String?
+  id                String                        @id @default(cuid())
+  nome              String?
+  responsavel       String?
+  statusDoLead      EnumLeadCadastroStatusDoLead?
+  ultimaAtualizacao DateTime?
+  updatedAt         DateTime                      @updatedAt
+}
+
+enum EnumAgentSpecialization {
+  Option1
+}
+
+enum EnumProjectStatus {
+  Option1
+}
+
+enum EnumCampaignStatus {
+  Option1
+}
+
+enum EnumLeadStatus {
+  Option1
+}
+
+enum EnumTaskStatus {
+  Option1
+}
+
+enum EnumTicketPriority {
+  Option1
+}
+
+enum EnumTicketStatus {
+  Option1
+}
+
+enum EnumContractValidationStatus {
+  Option1
+}
+
+enum EnumResourceAvailability {
+  Option1
+}
+
+enum EnumResourceResourceType {
+  Option1
+}
+
+enum EnumLeadCadastroStatusDoLead {
+  Option1
+}
