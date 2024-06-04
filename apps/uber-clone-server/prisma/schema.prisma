@@ -1,0 +1,180 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ride {
+  createdAt       DateTime        @default(now())
+  driver          Driver?         @relation(fields: [driverId], references: [id])
+  driverId        String?
+  dropoffLocation String?
+  endTime         DateTime?
+  id              String          @id @default(cuid())
+  payments        Payment[]
+  pickupLocation  String?
+  requestTime     DateTime?
+  rider           Rider?          @relation(fields: [riderId], references: [id])
+  riderId         String?
+  startTime       DateTime?
+  status          EnumRideStatus?
+  updatedAt       DateTime        @updatedAt
+}
+
+model Payment {
+  amount        Float?
+  createdAt     DateTime                  @default(now())
+  id            String                    @id @default(cuid())
+  paymentMethod String?
+  paymentStatus EnumPaymentPaymentStatus?
+  ride          Ride?                     @relation(fields: [rideId], references: [id])
+  rideId        String?
+  transactionId String?
+  updatedAt     DateTime                  @updatedAt
+}
+
+model Driver {
+  createdAt     DateTime @default(now())
+  email         String?
+  id            String   @id @default(cuid())
+  licenseNumber String?
+  name          String?
+  phoneNumber   String?
+  rating        Float?
+  rides         Ride[]
+  updatedAt     DateTime @updatedAt
+  vehicleType   String?
+}
+
+model Rider {
+  createdAt     DateTime @default(now())
+  email         String?
+  id            String   @id @default(cuid())
+  name          String?
+  paymentMethod String?
+  phoneNumber   String?
+  rating        Float?
+  rides         Ride[]
+  updatedAt     DateTime @updatedAt
+}
+
+model User {
+  createdAt       DateTime         @default(now())
+  email           String?
+  id              String           @id @default(cuid())
+  name            String?
+  notifications   Notification[]
+  password        String?
+  phoneNumber     String?
+  profilePicture  Json?
+  reviews         Review[]
+  roles           EnumUserRoles[]
+  serviceBookings ServiceBooking[]
+  supportTickets  SupportTicket[]
+  updatedAt       DateTime         @updatedAt
+}
+
+model ServiceBooking {
+  createdAt   DateTime                  @default(now())
+  endTime     DateTime?
+  id          String                    @id @default(cuid())
+  provider    Provider?                 @relation(fields: [providerId], references: [id])
+  providerId  String?
+  requestTime DateTime?
+  reviews     Review[]
+  serviceType String?
+  startTime   DateTime?
+  status      EnumServiceBookingStatus?
+  updatedAt   DateTime                  @updatedAt
+  user        User?                     @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
+model Provider {
+  createdAt       DateTime         @default(now())
+  email           String?
+  id              String           @id @default(cuid())
+  name            String?
+  phoneNumber     String?
+  profilePicture  Json?
+  rating          Float?
+  reviews         Review[]
+  serviceBookings ServiceBooking[]
+  supportTickets  SupportTicket[]
+  updatedAt       DateTime         @updatedAt
+}
+
+model Notification {
+  createdAt  DateTime @default(now())
+  id         String   @id @default(cuid())
+  message    String?
+  readStatus Boolean?
+  title      String?
+  updatedAt  DateTime @updatedAt
+  user       User?    @relation(fields: [userId], references: [id])
+  userId     String?
+}
+
+model Service {
+  availabilityStatus EnumServiceAvailabilityStatus?
+  createdAt          DateTime                       @default(now())
+  description        String?
+  id                 String                         @id @default(cuid())
+  name               String?
+  price              Float?
+  updatedAt          DateTime                       @updatedAt
+}
+
+model SupportTicket {
+  createdAt   DateTime                 @default(now())
+  description String?
+  id          String                   @id @default(cuid())
+  provider    Provider?                @relation(fields: [providerId], references: [id])
+  providerId  String?
+  status      EnumSupportTicketStatus?
+  subject     String?
+  updatedAt   DateTime                 @updatedAt
+  user        User?                    @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
+model Review {
+  comment          String?
+  createdAt        DateTime        @default(now())
+  id               String          @id @default(cuid())
+  provider         Provider?       @relation(fields: [providerId], references: [id])
+  providerId       String?
+  rating           Float?
+  serviceBooking   ServiceBooking? @relation(fields: [serviceBookingId], references: [id])
+  serviceBookingId String?
+  updatedAt        DateTime        @updatedAt
+  user             User?           @relation(fields: [userId], references: [id])
+  userId           String?
+}
+
+enum EnumRideStatus {
+  Option1
+}
+
+enum EnumPaymentPaymentStatus {
+  Option1
+}
+
+enum EnumUserRoles {
+  Option1
+}
+
+enum EnumServiceBookingStatus {
+  Option1
+}
+
+enum EnumServiceAvailabilityStatus {
+  Option1
+}
+
+enum EnumSupportTicketStatus {
+  Option1
+}
